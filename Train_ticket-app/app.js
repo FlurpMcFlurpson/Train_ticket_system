@@ -2,7 +2,7 @@ const incrementButton = document.getElementById('increment-button');
 const decrementButton = document.getElementById('decrement-button');
 const counterValue = document.getElementById('Ticket_Price');
 const lastUpdated = document.getElementById('last_updated');
-const counterAddress = '0xaE11F235941A1617572972677E0d243589EA0C45';
+const counterAddress = '0x57F1B19198aC15858b1162546C5DfB042Cbd355a';
 const counterABI = [
     {
         "inputs": [
