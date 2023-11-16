@@ -1,9 +1,9 @@
 const incrementButton = document.getElementById('increment-button');
 const decrementButton = document.getElementById('decrement-button');
-const counterValue = document.getElementById('counter');
+const counterValue = document.getElementById('Ticket_Price');
 const lastUpdated = document.getElementById('last_updated');
-const counterAddress = '0xe977721fF23E4754BCA3fE6752a5788690b9f53b';
-const counterABI = [[
+const counterAddress = '0xaE11F235941A1617572972677E0d243589EA0C45';
+const counterABI = [
     {
         "inputs": [
             {
@@ -188,7 +188,33 @@ const counterABI = [[
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "get_price",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
     }
-]]
+]
 const web3 = new Web3('http://localhost:7545');
-const counter = new web3.eth.Contract(counterABI, counterAddress);
+const Trian = new web3.eth.Contract(counterABI, counterAddress);
+
+window.addEventListener('load', async (event) => {
+    const value = await get_price();
+    counterValue.innerHTML = value;
+    console.log("updated");
+})
+
+
+async function get_price() {
+    const value = await Trian.methods.get_price().call();
+    return value;
+}

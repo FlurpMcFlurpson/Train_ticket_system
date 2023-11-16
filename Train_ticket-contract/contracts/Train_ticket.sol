@@ -71,4 +71,8 @@ contract Train_tickets {
         wallets[msg.sender] -= amount;
         payable(msg.sender).transfer(amount);
     }
+
+    function get_price() public view returns (uint256) {
+        return ticketPrice;
+    }
 }
