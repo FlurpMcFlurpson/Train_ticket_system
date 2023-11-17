@@ -13,33 +13,43 @@
 
     <div>
         <button class="enableEthereumButton">Enable Ethereum</button>
-        <h2>Account: <span class="showAccount"></span></h2>
+        <!-- <h2>Account: <span class="showAccount"></span></h2> -->
     </div>
 
     <div class="asset-interface">
         <div class="row1">
             <h3>Welcome to NewGenTrianCrop!</h3>
             <div class="row2">
-                <label>
-                    Current Ticket Price: <span id="Ticket_Price"></span>
-                </label>
+                <h3>
+                    Current Ticket Price: <span id="Ticket_Price"></span> ETH
+                </h3>
+                <button id="buy_ticket_button">Buy Ticket</button>
             </div>
-            <div class="row3">
-                <input id="setbalence" type="text" />
-                <button id="setbalence-button">Add funds</button>
-            </div>
-            <div class="row4">
-                <button id="Cheak-button">Cheak Balcence</button>
-            </div>
-            <div class="row5">
-                <input id="Withdraw" type="text" />
-                <button id="Withdraw-button">Withdraw funds</button>
-            </div>
-            <div class="row6">
-                <button id="Member-Reg">Register Membership</button>
-            </div>
-
         </div>
+
+        <div class="row3">
+            <input id="setbalance" type="text" />
+            <button id="setbalance-button">Add funds</button>
+        </div>
+        <div class="row4">
+            <button id="Cheak-button">Cheak Balance </button>
+            <label>
+                Current User Balance: <span id="Balance"></span>
+            </label>
+        </div>
+        <div class="row5">
+            <input id="Withdraw" type="text" />
+            <button id="Withdraw-button">Withdraw funds</button>
+        </div>
+        <div class="row6">
+            <button id="Member-Reg">Register Membership</button>
+        </div>
+        <div class="row7">
+            <input id="new_price" type="text" />
+            <button id="new_price_button">Set new price</button>
+        </div>
+
+    </div>
 
 
 </body>
@@ -47,3 +57,11 @@
 <script type="text/javascript" src="./app.js"></script>
 
 </html>
+
+<!-- To do list 
+
+    - set_price buttion
+    - buy_ticket Button
+
+
+-->
