@@ -68,13 +68,13 @@ contract Train_tickets {
         wallets[msg.sender] += msg.value;
     }
 
-    function get_balnace() public view returns (uint256) {
+    function get_balance() public view returns (uint256) {
         return wallets[msg.sender];
     }
 
     function withdraw(uint256 amount) public {
         require(amount > 0, "Can not withdraw 0");
-        require(wallets[msg.sender] >= amount, "Trasaction Failed");
+        require(wallets[msg.sender] >= amount, "Tansaction Failed");
 
         wallets[msg.sender] -= amount;
         payable(msg.sender).transfer(amount);
