@@ -32,7 +32,7 @@ contract("Train", function (accounts) {
     });
 
     // testing the buy ticket function
-    it("Should be able to buy trian ticket", async function () {
+    it("Able to buy trian ticket", async function () {
         await train.set_balance({ from: accounts[1], value: 1000 })
         let result = await train.buy_ticket({ from: accounts[1] })
         assert.equal(result.receipt.status, true)
@@ -45,11 +45,11 @@ contract("Train", function (accounts) {
 
     })
 
-
     // testing the set price function
     it("Able to set New price", async function () {
-        let result = await train.set_price(2000, { from: accounts[1] })
-        assert.equal(result.receipt.status, true)
+        await train.set_price(2000, { from: accounts[1] })
+        let result = await train.get_price()
+        assert.equal(result, 2000)
     })
     // test the ownerOnly moddifer
     it("Revert when non-owner trys to set price", async function () {
@@ -57,7 +57,7 @@ contract("Train", function (accounts) {
             train.set_price(2000, { from: accounts[2] }), ownerError)
     })
 
-    it("Revert when non-owner trys to set price", async function () {
+    it("Revert when new pirce is equal to current price", async function () {
         await truffleAssert.reverts(
             train.set_price(1000, { from: accounts[1] }), setpirceError)
     })
