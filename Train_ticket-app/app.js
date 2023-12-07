@@ -6,7 +6,8 @@ const counterValue = document.getElementById('Ticket_Price');
 const register = document.getElementById('Member-Reg');
 const new_Price_button = document.getElementById('new_price_button')
 const buy_ticket_button = document.getElementById('buy_ticket_button')
-const Address = '0xD45Eb5B7D5A794a5E48Ccc9962BD061DCC0Bc4Cf';
+const Address = '0xfc660f54c5a84b0C1d2e635EB514d5fea910681A';
+const MetaMask = document.getElementById('enableEthereumButton');
 const ABI = [
     {
         "inputs": [
@@ -208,8 +209,9 @@ const ABI = [
         "constant": true
     }
 ]
-const web3 = new Web3('http://localhost:7545');
+const web3 = new Web3(window.ethereum);
 const Trian = new web3.eth.Contract(ABI, Address);
+Trian.setProvider(window.ethereum);
 
 window.addEventListener('load', async (event) => {
     const value = await get_price();
@@ -222,12 +224,12 @@ set_balance_Button.onclick = async () => {
     const accounts = await web3.eth.getAccounts();
     const value = document.getElementById('setbalance').value;
     const WeiValue = Web3.utils.toWei(value, 'ether');
-    await Trian.methods.set_balance().send({ from: accounts[1], value: WeiValue });
+    await Trian.methods.set_balance().send({ from: accounts[0], value: WeiValue });
 }
 
 CheakButton.onclick = async () => {
     const accounts = await web3.eth.getAccounts();
-    const value = await Trian.methods.get_balnace().call({ from: accounts[1] });
+    const value = await Trian.methods.get_balnace().call({ from: accounts[0] });
     const etherValue = Web3.utils.fromWei(value, 'ether');
     Balance.innerHTML = etherValue;
 
@@ -237,7 +239,7 @@ Withdraw_button.onclick = async () => {
     const accounts = await web3.eth.getAccounts();
     const value = document.getElementById('Withdraw').value;
     const WeiValue = Web3.utils.toWei(value, 'ether');
-    await Trian.methods.withdraw(WeiValue).send({ from: accounts[1] });
+    await Trian.methods.withdraw(WeiValue).send({ from: accounts[0] });
 
 }
 
@@ -248,7 +250,7 @@ async function get_price() {
 
 register.onclick = async () => {
     const accounts = await web3.eth.getAccounts();
-    await Trian.methods.register().send({ from: accounts[1] })
+    await Trian.methods.register().send({ from: accounts[0] })
 }
 
 new_Price_button.onclick = async () => {
@@ -261,5 +263,14 @@ new_Price_button.onclick = async () => {
 
 buy_ticket_button.onclick = async () => {
     const accounts = await web3.eth.getAccounts();
-    await Trian.methods.buy_ticket().send({ from: accounts[1] })
+    await Trian.methods.buy_ticket().send({ from: accounts[0] })
+}
+
+MetaMask.onclick = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+        await ethereum.request({ method: 'eth_requestAccounts' });
+    }
+    else {
+        alert("Please install MetaMask")
+    }
 }

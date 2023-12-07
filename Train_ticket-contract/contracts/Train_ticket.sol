@@ -14,6 +14,14 @@ contract Train_tickets {
     mapping(address => Ticket) public tickets;
     mapping(address => bool) public members;
 
+    modifier onlyOwner() {
+        require(
+            msg.sender == owner,
+            "Only the owner can perfom this function!"
+        );
+        _;
+    }
+
     event Ticket_Purchased(uint256 Ticket_ID, address buyer);
     event Member_Registerd(address member);
 
@@ -50,8 +58,8 @@ contract Train_tickets {
         }
     }
 
-    function set_price(uint new_Price) public {
-        require(owner == msg.sender, "Access Denied");
+    function set_price(uint new_Price) public onlyOwner {
+        require(new_Price != ticketPrice, "No need to change price");
         ticketPrice = new_Price;
     }
 
